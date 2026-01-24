@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="my-4">{{ page_title }}</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Average Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+          <tr>
+            <td>
+              <a href="{% url 'books:detail' slug=book.slug %}">{{ book.title }}</a>
+            </td>
+            <td>
+              {% if book.avg_rating %}
+                {{ book.avg_rating|floatformat:2 }}
+              {% else %}
+                No ratings yet.
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
