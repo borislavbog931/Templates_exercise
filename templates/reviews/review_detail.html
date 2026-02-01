@@ -16,7 +16,11 @@
       </div>
       <div class="card-footer text-muted">
         By {{ review.author }} on {{ review.created_at|date:"d M Y" }}
-        <a href="{% url 'reviews:recent' %}" class="btn btn-primary float-end">Back to Recent Reviews</a>
+        <div class="float-end">
+            <a href="{% url 'reviews:edit' pk=review.pk %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'reviews:delete' pk=review.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'reviews:list' %}" class="btn btn-primary">Back to Recent Reviews</a>
+        </div>
       </div>
     </div>
   </div>

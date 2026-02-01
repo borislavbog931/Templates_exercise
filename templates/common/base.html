@@ -15,10 +15,11 @@
         <a class="navbar-brand" href="{% url 'books:home' %}">Book Hub</a>
     </div>
 
-    <nav class="d-flex gap-3">
+<nav class="d-flex gap-3">
         <a class="nav-link text-white" href="{% url 'books:list' %}">Books</a>
-        <a class="nav-link text-white me-3" href="{% url 'reviews:recent' %}">Recent reviews</a>
-
+        <a class="nav-link text-white" href="{% url 'books:create' %}">Create Book</a>
+        <a class="nav-link text-white" href="{% url 'reviews:create' %}">Create Review</a>
+        <a class="nav-link text-white me-3" href="{% url 'reviews:list' %}">Recent reviews</a>
     </nav>
 
 </header>

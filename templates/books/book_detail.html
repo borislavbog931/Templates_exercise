@@ -20,19 +20,27 @@
             <li class="list-group-item"><strong>Publication Date:</strong> {{ book.publishing_date|date:"d M Y" }}</li>
             <li class="list-group-item"><strong>Pages:</strong> {{ book.pages }}</li>
             <li class="list-group-item"><strong>Price:</strong> ${{ book.price }}</li>
+            <li class="list-group-item"><strong>Tags:</strong> {{ book.tags.all|join:', ' }}</li>
             <li class="list-group-item">
               {% if book.avg_rating %}
                 <strong>Average rating:</strong> {{ book.avg_rating|floatformat:2 }} / 5.00
               {% else %}
                 <strong>Average rating:</strong> No ratings yet.
               {% endif %}
+            <p>{{ book.description }}</p>
             </li>
           </ul>
+        
         </div>
         <div class="card-footer text-muted">
           <a href="{% url 'books:list' %}" class="btn btn-primary">Back to Book List</a>
         </div>
       </div>
+        <div class="col-md-4">
+            <a href='{% url 'books:edit' book.pk %}' class="btn btn-warning">Edit</a>
+            <a href='{% url 'books:delete' book.pk %}'class="btn btn-danger">Delete</a>
+            
+        </div>
     </div>
   </div>
 </div>

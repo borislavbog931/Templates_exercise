@@ -1,32 +1,44 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
   <div class="container">
     <h1 class="my-4">{{ page_title }}</h1>
+    <form class="mb-4">
+        <div class="input-group">
+            {{ search_form }}
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">Search</button>
+            </div>
+        </div>
+    </form>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Average Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for book in books %}
-          <tr>
-            <td>
-              <a href="{% url 'books:detail' slug=book.slug %}">{{ book.title }}</a>
-            </td>
-            <td>
-              {% if book.avg_rating %}
-                {{ book.avg_rating|floatformat:2 }}
-              {% else %}
-                No ratings yet.
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="row">
+      {% for book in books %}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="{% url 'books:detail' slug=book.slug %}">
+              <img class="card-img-top" src="{{ book.image_url }}" alt="{{ book.title }}"
+                   onerror="this.onerror=null;this.src='{% static 'img.png' %}';">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="{% url 'books:detail' slug=book.slug %}">{{ book.title }}</a>
+              </h4>
+              <p class="card-text">
+                {% if book.avg_rating %}
+                  Average Rating: {{ book.avg_rating|floatformat:2 }}
+                {% else %}
+                  No ratings yet.
+                {% endif %}
+              </p>
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'reviews:create_for_book' book_slug=book.slug %}" class="btn btn-primary">Create Review</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}
